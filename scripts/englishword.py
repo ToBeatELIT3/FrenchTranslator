@@ -1,6 +1,5 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
-#from .frenchword import FrenchWord
 import sys
 
 class EnglishWord:
