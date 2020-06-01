@@ -48,7 +48,7 @@ class EnglishWord:
         page_soup = soup(page_html, "html.parser")
 
         frenchword = page_soup.find("a", class_="dictLink featured")
-        frenchword = frenchword.text.strip()
+        frenchword = frenchword.text.strip().split(" ", 1)[0]
 
         print(f"{self.word} in French is: {frenchword}")
         return frenchword
