@@ -1,3 +1,5 @@
-from scripts.enfr import EnglishWord
+from scripts.englishword import EnglishWord
 
-print(EnglishWord("cookie").word())
+myword = EnglishWord("bake")
+
+print(myword.getfrenchtranslaton())

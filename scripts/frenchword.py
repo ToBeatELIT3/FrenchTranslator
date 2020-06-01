@@ -1,15 +1,14 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
-from .englishword import EnglishWord
 import sys
 
-sys.stoud = open("test.txt", "a+")
 
 class FrenchWord:
 
     def __init__(self, word):
         self.word = word
-    
+        self.my_url = (f"https://www.linguee.com/english-french/search?source=auto&query={self.word}")
+
         uClient = uReq(self.my_url)
         page_html = uClient.read()
         uClient.close()
