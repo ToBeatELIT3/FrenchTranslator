@@ -1,3 +1,3 @@
-from .enfr import EnglishWord
+from scripts.enfr import EnglishWord
 
 print(EnglishWord("cookie").word())
