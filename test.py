@@ -1,5 +1,5 @@
 from scripts.englishword import EnglishWord
 
-myword = EnglishWord("bake")
+myword = EnglishWord("coolioyus")
 
-print(myword.getpagehtml())
+myword.getpagehtml()
