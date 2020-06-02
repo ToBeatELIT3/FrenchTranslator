@@ -10,9 +10,11 @@ class EnglishWord:
         self.en_url = (f"https://www.dictionary.com/browse/{self.word}?s=ts")
 
     def getpagehtml(self):
-
-        with open(f"html/{self.word}_webpage.html", "w", encoding="utf-8") as filename:
+        with open(f"html/{self.word}_entofr_webpage.html", "w", encoding="utf-8") as filename: 
             filename.write(f"{self.page_soup_entofr}")
+
+        with open(f"html/{self.word}_en_webpage.html", "w", encoding="utf-8") as filename:
+            filename.write(f"{self.page_soup_en_url}")
 
     def getdefinition(self):
         uClient = uReq(self.en_url)
