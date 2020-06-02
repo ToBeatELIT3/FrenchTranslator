@@ -1,6 +1,7 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 import sys
+import os
 
 class EnglishWord:
 
@@ -23,8 +24,7 @@ class EnglishWord:
 
             self.page_soup_en_url = soup(page_html, "html.parser")
 
-        except: 
-            print("Invalid Word")
+        except: print("Invalid Word")
 
     def getpagehtml(self):
         try:
@@ -34,7 +34,10 @@ class EnglishWord:
             with open(f"html/{self.word}_en_webpage.html", "w", encoding="utf-8") as filename:
                 filename.write(f"{self.page_soup_en_url}")
         
-        except: print(f"[error] {self.word}is an Invalid Word")
+        except: 
+            print(f"[error] {self.word}is an Invalid Word")
+            os.remove(f"html/{self.word}_en_webpage.html")
+            os.remove(f"html/{self.word}_entofr_webpage.html")
 
     def getdefinition(self):
         try:
