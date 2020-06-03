@@ -26,44 +26,50 @@ class EnglishWord:
 
         except: print("Invalid Word")
 
-    def getpagehtml(self):
-        try:
-            with open(f"html/{self.word}_entofr_webpage.html", "w", encoding="utf-8") as filename: 
-                filename.write(f"{self.page_soup_entofr_url}")
-
-            with open(f"html/{self.word}_en_webpage.html", "w", encoding="utf-8") as filename:
-                filename.write(f"{self.page_soup_en_url}")
-        
+    def testwordvalid(self):
+        try: 
+            uClient = uReq(self.entofr_url)
+            return True
         except: 
-            print(f"[error] {self.word}is an Invalid Word")
-            os.remove(f"html/{self.word}_en_webpage.html")
-            os.remove(f"html/{self.word}_entofr_webpage.html")
+            print(f"[error] {self.word} is an Invalid Word")
+            return False
+
+    def getpagehtml(self):
+        if not self.testwordvalid(): return None
+
+        with open(f"html/{self.word}_entofr_webpage.html", "w", encoding="utf-8") as filename: 
+            filename.write(f"{self.page_soup_entofr_url}")
+
+        with open(f"html/{self.word}_en_webpage.html", "w", encoding="utf-8") as filename:
+            filename.write(f"{self.page_soup_en_url}")
+    
+        print(f"[error] {self.word}is an Invalid Word")
+        os.remove(f"html/{self.word}_en_webpage.html")
+        os.remove(f"html/{self.word}_entofr_webpage.html")
 
     def getdefinition(self):
-        try:
-            worddefinition =self.page_soup_en_url.find("span", class_="one-click-content css-1p89gle e1q3nk1v4")
-            worddefinition = worddefinition.text.strip()
-
-            print(f"The Definition of {self.word} is: {worddefinition}")
-            return worddefinition
+        if not self.testwordvalid(): return None
         
-        except: print(f"[error] {self.word} is an Invalid Word")
+        worddefinition =self.page_soup_en_url.find("span", class_="one-click-content css-1p89gle e1q3nk1v4")
+        worddefinition = worddefinition.text.strip()
+
+        print(f"The Definition of {self.word} is: {worddefinition}")
+        return worddefinition
     
     def getexaples(self):
-        try:
-            wordexaples = self.page_soup_en_url.findAll("p", class_="one-click-content css-a8m74p e15kc6du6")
-        
-            for x in range(len(wordexaples)):
-                print(f"Example {x}: {wordexaples[x].text.strip()}\n")
+        if not self.testwordvalid(): return None
 
-        except: print(f"[error] {self.word}  is an Invalid Word")
+        wordexaples = self.page_soup_en_url.findAll("p", class_="one-click-content css-a8m74p e15kc6du6")
+    
+        for x in range(len(wordexaples)):
+            print(f"Example {x}: {wordexaples[x].text.strip()}\n")
 
     def getfrenchtranslaton(self):
-        try:
-            frenchword = self.page_soup_entofr_url.find("a", class_="dictLink featured")
-            frenchword = frenchword.text.strip().split(" ", 1)[0]
+        if not self.testwordvalid(): return None
 
-            print(f"{self.word} in French is: {frenchword}")
-            return frenchword
+        frenchword = self.page_soup_entofr_url.find("a", class_="dictLink featured")
+        frenchword = frenchword.text.strip().split(" ", 1)[0]
 
-        except: print(f"[error] {self.word} is an Invalid Word")
+        print(f"{self.word} in French is: {frenchword}")
+        return frenchword
+
