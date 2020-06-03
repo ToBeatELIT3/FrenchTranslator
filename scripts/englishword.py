@@ -35,17 +35,17 @@ class EnglishWord:
             return False
 
     def getpagehtml(self):
-        if not self.testwordvalid(): return None
+        if not self.testwordvalid(): 
+            print(f"[error] {self.word}is an Invalid Word")
+            os.remove(f"html/{self.word}_en_webpage.html")
+            os.remove(f"html/{self.word}_entofr_webpage.html")
+            return None
 
         with open(f"html/{self.word}_entofr_webpage.html", "w", encoding="utf-8") as filename: 
             filename.write(f"{self.page_soup_entofr_url}")
 
         with open(f"html/{self.word}_en_webpage.html", "w", encoding="utf-8") as filename:
             filename.write(f"{self.page_soup_en_url}")
-    
-        print(f"[error] {self.word}is an Invalid Word")
-        os.remove(f"html/{self.word}_en_webpage.html")
-        os.remove(f"html/{self.word}_entofr_webpage.html")
 
     def getdefinition(self):
         if not self.testwordvalid(): return None
