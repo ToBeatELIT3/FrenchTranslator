@@ -1,7 +1,6 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 import sys
-import os
 
 class EnglishWord:
 
@@ -27,11 +26,7 @@ class EnglishWord:
         except: print("Invalid Word")
 
     def getpagehtml(self):
-        if not testwordvalid(self.en_url, self.word): 
-            print(f"[error] {self.word}is an Invalid Word")
-            os.remove(f"html/{self.word}_en_webpage.html")
-            os.remove(f"html/{self.word}_entofr_webpage.html")
-            return None
+        if not testwordvalid(self.en_url, self.word): return None
 
         with open(f"html/{self.word}_entofr_webpage.html", "w", encoding="utf-8") as filename: 
             filename.write(f"{self.page_soup_entofr_url}")
@@ -42,7 +37,7 @@ class EnglishWord:
     def getdefinition(self):
         if not testwordvalid(self.en_url, self.word): return None
         
-        worddefinition =self.page_soup_en_url.find("span", class_="one-click-content css-1p89gle e1q3nk1v4")
+        worddefinition = self.page_soup_en_url.find("span", class_="one-click-content css-1p89gle e1q3nk1v4")
         worddefinition = worddefinition.text.strip()
 
         print(f"The Definition of {self.word} is: {worddefinition}")

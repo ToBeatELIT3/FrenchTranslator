@@ -1,4 +1,8 @@
 from scripts.englishword import EnglishWord
-myword = EnglishWord("testeyesutf")
+from scripts.frenchword import FrenchWord
 
-myword.getdefinition()
+myword = EnglishWord("testeyesutf")
+frword = FrenchWord("pain")
+
+frword.getexamples
+myword.getpagehtml()
