@@ -72,4 +72,3 @@ class EnglishWord:
 
         print(f"{self.word} in French is: {frenchword}")
         return frenchword
-
