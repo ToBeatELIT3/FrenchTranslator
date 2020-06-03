@@ -26,16 +26,8 @@ class EnglishWord:
 
         except: print("Invalid Word")
 
-    def testwordvalid(self):
-        try: 
-            uClient = uReq(self.entofr_url)
-            return True
-        except: 
-            print(f"[error] {self.word} is an Invalid Word")
-            return False
-
     def getpagehtml(self):
-        if not self.testwordvalid(): 
+        if not testwordvalid(self.en_url, self.word): 
             print(f"[error] {self.word}is an Invalid Word")
             os.remove(f"html/{self.word}_en_webpage.html")
             os.remove(f"html/{self.word}_entofr_webpage.html")
@@ -48,7 +40,7 @@ class EnglishWord:
             filename.write(f"{self.page_soup_en_url}")
 
     def getdefinition(self):
-        if not self.testwordvalid(): return None
+        if not testwordvalid(self.en_url, self.word): return None
         
         worddefinition =self.page_soup_en_url.find("span", class_="one-click-content css-1p89gle e1q3nk1v4")
         worddefinition = worddefinition.text.strip()
@@ -57,7 +49,7 @@ class EnglishWord:
         return worddefinition
     
     def getexaples(self):
-        if not self.testwordvalid(): return None
+        if not testwordvalid(self.en_url, self.word): return None
 
         wordexaples = self.page_soup_en_url.findAll("p", class_="one-click-content css-a8m74p e15kc6du6")
     
@@ -65,10 +57,18 @@ class EnglishWord:
             print(f"Example {x}: {wordexaples[x].text.strip()}\n")
 
     def getfrenchtranslaton(self):
-        if not self.testwordvalid(): return None
+        if not testwordvalid(self.en_url, self.word): return None
 
         frenchword = self.page_soup_entofr_url.find("a", class_="dictLink featured")
         frenchword = frenchword.text.strip().split(" ", 1)[0]
 
         print(f"{self.word} in French is: {frenchword}")
         return frenchword
+
+def testwordvalid(url, word):
+        try: 
+            uClient = uReq(url)
+            return True
+        except: 
+            print(f"[error] {word} is an Invalid Word")
+            return False

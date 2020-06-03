@@ -1,4 +1,4 @@
 from scripts.englishword import EnglishWord
-myword = EnglishWord("test")
+myword = EnglishWord("testeyesutf")
 
-myword.getfrenchtranslaton()
+myword.getdefinition()
