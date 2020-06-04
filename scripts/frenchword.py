@@ -1,7 +1,6 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 import sys
-import os
 
 class FrenchWord:
 
@@ -22,15 +21,13 @@ class FrenchWord:
             page_html = uClient.read()
             uClient.close()
 
-            self.page_soup_fr_url = soup(page_html, "html.parer")
+            self.page_soup_fr_url = soup(page_html, "html.parser")
+            self.isvalid = True
 
-        except: print("Invalid Word")
+        except: self.isvalid = False 
 
     def getpagehtml(self):
-        if not testwordvalid(self.fr_url, self.word):
-            os.remove(f"html/{self.word}_fr_webpage.html")
-            os.remove(f"html/{self.word}_frtoen_webpage.html")
-            return None
+        if not testwordvalid(self.fr_url, self.word, self.page_soup_fr_url) or not self.isvalid: return None
 
         with open(f"html/{self.word}_frtoen_webpage.html", "w", encoding="utf-8") as filename: 
             filename.write(f"{self.page_soup_frtoen_url}")
@@ -38,20 +35,25 @@ class FrenchWord:
         with open(f"html/{self.word}_fr_webpage.html", "w", encoding="utf-8") as filename:
             filename.write(f"{self.page_soup_fr_url}")
 
-    def getexamples(self):
-        if not testwordvalid(self.fr_url, self.word): return None
-        
-        worddefinition = self.page_soup_fr_url.findAll("div", class_="defbox")
-        worddefinition = worddefinition.text.strip()
+    def getdefinition(self):
+        if not testwordvalid(self.fr_url, self.word, self.page_soup_fr_url) or not self.isvalid: return None
+        my_list = []
 
-        for words in range(len(worddefinition)):
-            myword = worddefinition[words].a
-            print(myword)
-            
-def testwordvalid(url, word):
+        definition = self.page_soup_fr_url.find("div", class_="defbox").li.select("a")
+
+        for x in range(len(definition)):
+            my_list.append(definition[x].text.strip())
+
+        my_definition = " ".join(my_list)
+
+        print(f"The Definition of {self.word} is: {my_definition}")
+        return my_definition
+
+def testwordvalid(my_url, word, page_soup):
         try: 
-            uClient = uReq(url)
+            definition = page_soup.find("div", class_="defbox").li.select("a")
             return True
-        except: 
+        except:
+             
             print(f"[error] {word} is an Invalid Word")
             return False
