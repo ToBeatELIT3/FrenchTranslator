@@ -4,5 +4,6 @@ from scripts.frenchword import FrenchWord
 from bs4 import BeautifulSoup as soup
 
 #myword = EnglishWord("testeyesutf")
-frword = FrenchWord("elle")
-frword.getexamples()
+frword = FrenchWord("aout")
+frword.getdefinition()
+frword.getenglishtranslation()
