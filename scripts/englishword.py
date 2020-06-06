@@ -54,6 +54,10 @@ class EnglishWord:
     def getfrenchtranslaton(self):
         if not testwordvalid(self.en_url, self.word): return None
 
+        if self.word == "i":
+            print(f"{self.word} in French is: je")
+            return "je"
+
         frenchword = self.page_soup_entofr_url.find("a", class_="dictLink featured")
         frenchword = frenchword.text.strip().split(" ", 1)[0]
 

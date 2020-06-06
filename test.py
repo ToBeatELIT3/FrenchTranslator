@@ -1,9 +1,17 @@
 from scripts.englishword import EnglishWord
-from urllib.request import urlopen as uReq
 from scripts.frenchword import FrenchWord
-from bs4 import BeautifulSoup as soup
 
-#myword = EnglishWord("testeyesutf")
-frword = FrenchWord("aout")
-frword.getdefinition()
-frword.getenglishtranslation()
+def translate(word):
+    enword = EnglishWord(word)
+
+    return enword.getfrenchtranslaton()
+
+def main(word):
+    wordlist = word.split()
+    
+    for x in range(len(wordlist)):
+        translate(wordlist[x])
+
+if __name__ == "__main__":
+    main(input("Paragraph: "))
+    
