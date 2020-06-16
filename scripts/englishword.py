@@ -58,6 +58,10 @@ class EnglishWord:
             print(f"{self.word} in French is: je")
             return "je"
 
+        elif self.word == "a":
+            print(f"{self.word} in French is: a")
+            return "a"
+
         frenchword = self.page_soup_entofr_url.find("a", class_="dictLink featured")
         frenchword = frenchword.text.strip().split(" ", 1)[0]
 
