@@ -28,10 +28,10 @@ class EnglishWord:
     def getpagehtml(self):
         if not testwordvalid(self.en_url, self.word): return None
 
-        with open(f"html/{self.word}_entofr_webpage.html", "w", encoding="utf-8") as filename: 
+        with open(f"downloaded_html/{self.word}_entofr_webpage.html", "w", encoding="utf-8") as filename: 
             filename.write(f"{self.page_soup_entofr_url}")
 
-        with open(f"html/{self.word}_en_webpage.html", "w", encoding="utf-8") as filename:
+        with open(f"downloaded_html/{self.word}_en_webpage.html", "w", encoding="utf-8") as filename:
             filename.write(f"{self.page_soup_en_url}")
 
     def getdefinition(self):
@@ -50,6 +50,8 @@ class EnglishWord:
     
         for x in range(len(wordexaples)):
             print(f"Example {x}: {wordexaples[x].text.strip()}\n")
+        
+        return wordexaples
 
     def getfrenchtranslaton(self):
         if not testwordvalid(self.en_url, self.word): return None

@@ -45,10 +45,10 @@ class FrenchWord:
     def getpagehtml(self):
         if not self.isvalid or not testwordvalid(self.fr_url, self.word, self.page_soup_fr_url): return None
 
-        with open(f"html/{self.word}_frtoen_webpage.html", "w", encoding="utf-8") as filename: 
+        with open(f"downloaded_html/{self.word}_frtoen_webpage.html", "w", encoding="utf-8") as filename: 
             filename.write(f"{self.page_soup_frtoen_url}")
 
-        with open(f"html/{self.word}_fr_webpage.html", "w", encoding="utf-8") as filename:
+        with open(f"downloaded_html/{self.word}_fr_webpage.html", "w", encoding="utf-8") as filename:
             filename.write(f"{self.page_soup_fr_url}")
 
     def getdefinition(self):
@@ -72,6 +72,8 @@ class FrenchWord:
 
         for x in range(len(wordexamples)):
             print(f"Example {x}: {wordexamples[x].text.strip()}\n")
+
+        return wordexamples
 
     def getenglishtranslation(self):
         if not self.isvalid or not testwordvalid(self.fr_url, self.word, self.page_soup_fr_url): return None
