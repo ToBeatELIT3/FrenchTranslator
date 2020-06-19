@@ -1,6 +1,6 @@
 # ToBeatElite
 # FrenchTranslator
-
+# Python
 GUIDLINES:
 1) In Some Cases, Accented Letters cannot render
 2) Proper Nouns cannot be Recognized
