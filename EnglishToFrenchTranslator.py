@@ -1,3 +1,4 @@
+#ToBeatElite
 from scripts.englishword import EnglishWord
 
 def main():
