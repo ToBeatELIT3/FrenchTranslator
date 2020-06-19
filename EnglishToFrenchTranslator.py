@@ -2,7 +2,7 @@ from scripts.englishword import EnglishWord
 
 def main():
 
-    my_word = input("Enter Sentence Here : ")
+    my_word = input("English To French Translator V1\n\nInput \"00QUIT00\" to Quit\nEnter Sentence Here : ")
     my_word_list = my_word.split()
 
     if my_word == "00QUIT00": quit()
@@ -17,5 +17,4 @@ def main():
     main()
 
 if __name__ == "__main__": 
-    print("English To French Translator V1\n\nInput \"00QUIT00\" to Quit\n")
     main()
