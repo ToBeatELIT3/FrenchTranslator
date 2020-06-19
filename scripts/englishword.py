@@ -51,10 +51,13 @@ class EnglishWord:
 
         wordexaples = self.page_soup_en_url.findAll("p", class_="one-click-content css-a8m74p e15kc6du6")
     
+        wordexaples_returnlist = []
+
         for x in range(len(wordexaples)):
             print(f"Example {x}: {wordexaples[x].text.strip()}\n")
+            wordexaples_returnlist.append(wordexaples[x].text.strip())
         
-        return wordexaples
+        return wordexaples_returnlist
 
     def getfrenchtranslaton(self):
         if not testwordvalid(self.en_url, self.word): return None

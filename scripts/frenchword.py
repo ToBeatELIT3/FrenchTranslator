@@ -73,10 +73,13 @@ class FrenchWord:
 
         wordexamples = self.page_soup_fr_exaples_url.find("ul", class_="citation").select("li")
 
+        wordexamples_returnlist = []
+
         for x in range(len(wordexamples)):
             print(f"Example {x}: {wordexamples[x].text.strip()}\n")
-
-        return wordexamples
+            wordexamples_returnlist.append(wordexamples[x].text.strip())
+        
+        return wordexamples_returnlist
 
     def getenglishtranslation(self):
         if not self.isvalid or not testwordvalid(self.fr_url, self.word, self.page_soup_fr_url): return None

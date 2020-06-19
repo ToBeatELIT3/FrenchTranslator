@@ -1,3 +1,4 @@
+# ToBeatElite
 # FrenchTranslator
 
 GUIDLINES:
@@ -7,16 +8,7 @@ GUIDLINES:
 
 ---------------------------------------------------------------------
 
-SOURCES:
-www.linguee.com
-www.dictionary.com
-www.dictionary.cambridge.org
-www.le-dictionnaire.com
-https://www.kikiladi.com
-
----------------------------------------------------------------------
-
-Built on Python v3.8.2 64bit
+Built using Python v3.8.2 64bit
 
 ---------------------------------------------------------------------
 

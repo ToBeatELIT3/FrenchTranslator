@@ -15,7 +15,7 @@ def easytranslate():
     if easy_translate_intvar.get() == 1:
         give_examples_checkbutton.config(state=DISABLED)
         download_html_checkbutton.config(state=DISABLED)
-    
+
     if easy_translate_intvar.get() == 0:
         give_examples_checkbutton.config(state=NORMAL)
         download_html_checkbutton.config(state=NORMAL)
@@ -48,7 +48,7 @@ def translate():
                     if give_examples_intvar.get() == 1:
                         my_english_word_examples = my_english_word.getexaples() 
 
-                    if download_html_intvar.get() == 1:
+                    if download_html_intvar.get() == 1 and easy_translate_intvar.get() != 1:
                         my_english_word.getpagehtml()
 
                     if easy_translate_intvar.get() == 1:
@@ -58,12 +58,12 @@ def translate():
                     elif easy_translate_intvar.get() == 0:
                         
                         with open(f"output_files/{file_name_stringvar.get()}.txt", "a+", encoding="UTF-8") as filename:
-                            filename.write(f"{my_english_word.word} in French is : {my_english_word_translation}\n")
+                            filename.write(f"{my_english_word.word} in French is : {unidecode.unidecode(my_english_word_translation)}\n")
                             filename.write(f"The Definition of {my_english_word.word} is : {my_english_word_defintion}\n")
                         
                             try:
                                 for x in range(len(my_english_word_examples)):
-                                    filename.write(f"Eample {x} : {my_english_word_examples[x].text.strip()}\n")
+                                    filename.write(f"Example {x} : {my_english_word_examples[x]}\n")
                         
                             except: pass
            
@@ -91,13 +91,13 @@ def translate():
                             filename.write(f"{my_french_word_translation} ")
 
                     elif easy_translate_intvar.get() == 0:
-                        with open(f"output_files/{file_name_stringvar.get()}.txt", "a+") as filename:
+                        with open(f"output_files/{file_name_stringvar.get()}.txt", "a+", encoding="UTF-8") as filename:
                             filename.write(f"{my_french_word.word} in English is : {my_french_word_translation}\n")
                             filename.write(f"The Definition of {my_french_word.word} is : {my_french_word_definition}\n")
 
                             try:
                                 for x in range(len(my_french_word_examples)):
-                                    filename.write(f"Example {x} : {unidecode.unidecode(my_french_word_examples[x].text.strip())}\n")
+                                    filename.write(f"Example {x} : {unidecode.unidecode(my_french_word_examples[x])}\n")
                             
                             except: pass
             
