@@ -23,7 +23,9 @@ class EnglishWord:
 
             self.page_soup_en_url = soup(page_html, "html.parser")
 
-        except: print("Invalid Word")
+        except: 
+            self.word = "invalid_word"
+            print("Invalid Word")
 
     def getpagehtml(self):
         if not testwordvalid(self.en_url, self.word): return None

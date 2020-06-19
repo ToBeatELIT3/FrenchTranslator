@@ -40,7 +40,9 @@ class FrenchWord:
             self.page_soup_fr_exaples_url = soup(page_html, "html.parser")
             self.isvalid = True
 
-        except: self.isvalid = False 
+        except:
+            self.word = "invalid_word"
+            self.isvalid = False 
 
     def getpagehtml(self):
         if not self.isvalid or not testwordvalid(self.fr_url, self.word, self.page_soup_fr_url): return None
