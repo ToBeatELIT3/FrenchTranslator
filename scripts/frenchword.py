@@ -1,9 +1,6 @@
 #ToBeatElite
 from .utils import getpagesouphtml, testurlvalid
-from urllib.request import urlopen as uReq
-from bs4 import BeautifulSoup as soup
 import unidecode
-import sys
 
 class FrenchWord:
 

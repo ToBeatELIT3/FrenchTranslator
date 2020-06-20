@@ -109,7 +109,6 @@ def translate():
                         with open(f"outpur_files/{file_name_stringvar.get()}_easytranslate.txt", "w+") as filename:
                             filename.write(f"[ERROR] THERE IS AN INVALID WORD\nQUITTING")
 
-
         start_button.config(state=NORMAL)
 
     except: 
