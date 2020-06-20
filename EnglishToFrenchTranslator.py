@@ -15,7 +15,5 @@ def main():
         try: my_english_word.getfrenchtranslaton()
         except: print("[error] Sorry, an Error Occured")
     
-    main()
-
 if __name__ == "__main__": 
-    main()
+    while True: main()
