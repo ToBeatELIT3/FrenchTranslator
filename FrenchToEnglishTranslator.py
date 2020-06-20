@@ -16,4 +16,4 @@ def main():
         except: print("[error] Sorry, an Error Occured")
     
 if __name__ == "__main__": 
-    while True;+: main()
+    while True: main()
