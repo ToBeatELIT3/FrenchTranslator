@@ -1,4 +1,4 @@
-#ToBeatElit3
+#ToBeatElite
 from scripts.englishword import EnglishWord
 from scripts.frenchword import FrenchWord
 from tkinter import *
