@@ -3,7 +3,6 @@ from scripts.englishword import EnglishWord
 from scripts.frenchword import FrenchWord
 from tkinter import *
 import threading
-import unidecode
 
 root = Tk()
 root.title("Translator V1")
@@ -41,7 +40,7 @@ def translate():
 
                 if my_english_word.word != "invalid_word":
 
-                    my_english_word_translation = unidecode.unidecode(my_english_word.getfrenchtranslaton())
+                    my_english_word_translation = my_english_word.getfrenchtranslaton()
                     
                     my_english_word_defintion = my_english_word.getdefinition()
 
@@ -58,7 +57,7 @@ def translate():
                     elif easy_translate_intvar.get() == 0:
                         
                         with open(f"output_files/{file_name_stringvar.get()}.txt", "a+", encoding="UTF-8") as filename:
-                            filename.write(f"{my_english_word.word} in French is : {unidecode.unidecode(my_english_word_translation)}\n")
+                            filename.write(f"{my_english_word.word} in French is : {my_english_word_translation}\n")
                             filename.write(f"The Definition of {my_english_word.word} is : {my_english_word_defintion}\n")
                         
                             try:
@@ -76,7 +75,7 @@ def translate():
 
                 if my_french_word.word != "invalid_word":
 
-                    my_french_word_translation = unidecode.unidecode(my_french_word.getenglishtranslation())
+                    my_french_word_translation = my_french_word.getenglishtranslation()
 
                     my_french_word_definition = my_french_word.getdefinition()
 
@@ -97,13 +96,19 @@ def translate():
 
                             try:
                                 for x in range(len(my_french_word_examples)):
-                                    filename.write(f"Example {x} : {unidecode.unidecode(my_french_word_examples[x])}\n")
+                                    filename.write(f"Example {x} : {my_french_word_examples[x]}\n")
                             
                             except: pass
             
                 else:
-                    with open(f"outpur_files/{file_name_stringvar.get()}.txt", "w+") as filename:
-                        filename.write(f"[ERROR] THERE IS AN INVALID WORD\nQUITTING")
+                    if easy_translate_intvar.get() == 0:
+                        with open(f"outpur_files/{file_name_stringvar.get()}.txt", "w+") as filename:
+                            filename.write(f"[ERROR] THERE IS AN INVALID WORD\nQUITTING")
+
+                    elif easy_translate_intvar.get() == 1:
+                        with open(f"outpur_files/{file_name_stringvar.get()}_easytranslate.txt", "w+") as filename:
+                            filename.write(f"[ERROR] THERE IS AN INVALID WORD\nQUITTING")
+
 
         start_button.config(state=NORMAL)
 

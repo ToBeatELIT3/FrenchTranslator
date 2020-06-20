@@ -2,6 +2,7 @@
 from .utils import getpagesouphtml, testurlvalid
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
+import unidecode
 import sys
 
 class FrenchWord:
@@ -10,15 +11,7 @@ class FrenchWord:
 
         try:
 
-            special_chars = ["ç", "é", "â", "ê", "î", "ô", "û", "à", "è", "ù", "ë", "ï", "ü"]
-            
-            self.word = word.replace(" ", "").lower()
-
-            for x in range(len(list(self.word))): 
-                if list(self.word)[x] in special_chars:
-                    print("Warning: Special Charecters WIll Not Be Registered And Will Return NOTHING") 
-                    print("Attention: les Charecters Spéciaux ne seront pas enregistrés et ne retourneront RIEN")
-                    self.isvalid = False
+            self.word = unidecode.unidecode(word.replace(" ", "").lower())
 
             self.fr_url = f"https://www.le-dictionnaire.com/definition/{self.word}"
 
@@ -48,7 +41,7 @@ class FrenchWord:
         definition = self.page_soup_fr_url.find("div", class_="defbox").li.select("a")
 
         for x in range(len(definition)):
-            my_list.append(definition[x].text.strip())
+            my_list.append(unidecode.unidecode(definition[x].text.strip()))
 
         my_definition = " ".join(my_list)
 
@@ -63,8 +56,8 @@ class FrenchWord:
         wordexamples_returnlist = []
 
         for x in range(len(wordexamples)):
-            print(f"Example {x}: {wordexamples[x].text.strip()}\n")
-            wordexamples_returnlist.append(wordexamples[x].text.strip())
+            print(f"Example {x}: {unidecode.unidecode(wordexamples[x].text.strip())}\n")
+            wordexamples_returnlist.append(unidecode.unidecode(wordexamples[x].text.strip()))
         
         return wordexamples_returnlist
 

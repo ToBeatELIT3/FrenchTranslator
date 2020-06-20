@@ -2,6 +2,7 @@
 from .utils import getpagesouphtml, testurlvalid
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
+import unidecode
 import sys
 
 class EnglishWord:
@@ -65,5 +66,5 @@ class EnglishWord:
         frenchword = self.page_soup_entofr_url.find("a", class_="dictLink featured")
         frenchword = frenchword.text.strip().split(" ", 1)[0]
 
-        print(f"{self.word} in French is: {frenchword}")
-        return frenchword
+        print(f"{self.word} in French is: {unidecode.unidecode(frenchword)}")
+        return unidecode.unidecode(frenchword)

@@ -6,6 +6,8 @@ GUIDLINES:
 1) In Some Cases, Accented Letters cannot render
 2) Proper Nouns cannot be Recognized
 3) Getting mass "Invalid Word"s is most likly an internet connectivity Issue
+4) Context of a Word Cannot be Recognized
+5) In Some Cases, an Unreconized Word will make the Program Close without an Eroor Message
 
 -----------------------------------------------------------------------
 
