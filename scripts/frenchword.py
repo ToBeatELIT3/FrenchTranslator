@@ -1,4 +1,5 @@
 #ToBeatElite
+from .utils import getpagesouphtml, testurlvalid
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 import sys
@@ -19,26 +20,11 @@ class FrenchWord:
                     print("Attention: les Charecters Spéciaux ne seront pas enregistrés et ne retourneront RIEN")
                     self.isvalid = False
 
-            self.frtoen_url = f"https://dictionary.cambridge.org/dictionary/french-english/{self.word}"
             self.fr_url = f"https://www.le-dictionnaire.com/definition/{self.word}"
-            self.fr_exaples = f"https://www.kikiladi.com/citation.php?mot={self.word}"
-            uClient = uReq(self.frtoen_url)
-            page_html = uClient.read()
-            uClient.close()
 
-            self.page_soup_frtoen_url = soup(page_html, "html.parser")
-
-            uClient = uReq(self.fr_url)
-            page_html = uClient.read()
-            uClient.close()
-
-            self.page_soup_fr_url = soup(page_html, "html.parser")
-
-            uClient = uReq(self.fr_exaples)
-            page_html = uClient.read()
-            uClient.close()
-
-            self.page_soup_fr_exaples_url = soup(page_html, "html.parser")
+            self.page_soup_frtoen_url = getpagesouphtml(f"https://dictionary.cambridge.org/dictionary/french-english/{self.word}")
+            self.page_soup_fr_url = getpagesouphtml(f"https://www.le-dictionnaire.com/definition/{self.word}")
+            self.page_soup_fr_exaples_url = getpagesouphtml( f"https://www.kikiladi.com/citation.php?mot={self.word}")
             self.isvalid = True
 
         except:
@@ -46,7 +32,8 @@ class FrenchWord:
             self.isvalid = False 
 
     def getpagehtml(self):
-        if not self.isvalid or not testwordvalid(self.fr_url, self.word, self.page_soup_fr_url): return None
+        if not self.isvalid or not testurlvalid(self.fr_url, self.word): 
+            return None
 
         with open(f"downloaded_html/{self.word}_frtoen_webpage.html", "w", encoding="utf-8") as filename: 
             filename.write(f"{self.page_soup_frtoen_url}")
@@ -55,7 +42,7 @@ class FrenchWord:
             filename.write(f"{self.page_soup_fr_url}")
 
     def getdefinition(self):
-        if not self.isvalid or not testwordvalid(self.fr_url, self.word, self.page_soup_fr_url): return None
+        if not self.isvalid or not testurlvalid(self.fr_url, self.word): return None
         my_list = []
 
         definition = self.page_soup_fr_url.find("div", class_="defbox").li.select("a")
@@ -69,7 +56,7 @@ class FrenchWord:
         return my_definition
 
     def getexamples(self):
-        if not self.isvalid or not testwordvalid(self.fr_url, self.word, self.page_soup_fr_url): return None
+        if not self.isvalid or not testurlvalid(self.fr_url, self.word): return None
 
         wordexamples = self.page_soup_fr_exaples_url.find("ul", class_="citation").select("li")
 
@@ -82,19 +69,10 @@ class FrenchWord:
         return wordexamples_returnlist
 
     def getenglishtranslation(self):
-        if not self.isvalid or not testwordvalid(self.fr_url, self.word, self.page_soup_fr_url): return None
+        if not self.isvalid or not testurlvalid(self.fr_url, self.word): return None
 
         englishword = self.page_soup_frtoen_url.find("span", class_="trans dtrans")
         englishword = englishword.text.strip().split(" ", 1)[0]
 
         print(f"{self.word} en English est: {englishword}")
         return englishword
-
-def testwordvalid(my_url, word, page_soup):
-        try: 
-            definition = page_soup.find("div", class_="defbox").li.select("a")
-            return True
-        except:
-             
-            print(f"[error] {word} is an Invalid Word")
-            return False
